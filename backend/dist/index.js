@@ -5,6 +5,7 @@ const server = http.createServer((request, response) => {
     response.end("hi there");
 });
 const wss = new WebSocketServer({ server });
+let user = 0;
 wss.on('connection', function connection(ws) {
     ws.on('error', console.error);
     ws.on('message', function message(data, isBinary) {
@@ -14,6 +15,7 @@ wss.on('connection', function connection(ws) {
             }
         });
     });
+    console.log("User Connected", ++user);
     ws.send('Hello! Message from Server!!');
 });
 server.listen(8080, () => {
